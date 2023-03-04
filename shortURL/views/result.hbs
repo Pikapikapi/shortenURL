@@ -14,14 +14,6 @@
       value='{{shortUrl}}'
       readonly
     />
-    <button class='btn btn-primary' type='button' onclick='copy()'>copy</button>
     <button class='btn btn-success' type='submit'>take me to origin URL!</button>
   </div>
 </form>
-<script>
-  function copy() { const input = document.getElementById("copy-board"); const
-  textToCopy = input.value; tempTextArea = document.createElement("textarea");
-  tempTextArea.value = textToCopy; document.body.appendChild(tempTextArea);
-  tempTextArea.select(); document.execCommand("copy");
-  document.body.removeChild(tempTextArea); alert("copy")}
-</script>
