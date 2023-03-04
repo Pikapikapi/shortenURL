@@ -5,6 +5,11 @@ const bodyParser = require('body-parser')
 const routes = require('./routes')
 const port = 3000
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+//connect to mongoDB
+require('./config/mongoose')
 const app = express()
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')

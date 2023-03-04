@@ -1,31 +1,18 @@
 const express = require('express')
 const router = express.Router()
-const crypto = require('crypto')
+// const crypto = require('crypto')
 const UrlModel = require('../../models/shortURLMap')
 
 function generateShortUrl() {
-  return crypto.randomBytes(4).toString('hex')
+  // return crypto.randomBytes(4).toString('hex')
+  const newURL = Math.random().toString(36).substr(2, 5)
+  return newURL
 }
 
 // 查詢原始網址對應的短網址
 async function findShortUrl(longUrl) {
   const url = await UrlModel.findOne({ longUrl: longUrl }).lean().exec()
   return url ? url.shortUrl : null
-}
-
-// 創建新URL
-const createURL = () => {
-  const shortUrl = generateShortUrl()
-  const url = new UrlModel({ longUrl: longUrl, shortUrl: shortUrl })
-  url.save((err) => {
-    if (err) {
-      console.error(err)
-      res.send('Error occurred while shortening URL')
-    } else {
-      const shortUrl = `http://localhost:3000/${url.shortUrl}`
-      res.render('result', { shortUrl: shortUrl })
-    }
-  })
 }
 
 // 處理表單提交
